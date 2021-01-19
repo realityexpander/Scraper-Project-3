@@ -1,7 +1,9 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 
 
-// Zen quotes source: https://quotabulary.com/famous-zen-quotes-about-life
+// Stock Prices
+// https://docs.google.com/spreadsheets/d/1fz1KCUkLiWRPZ2FThC-wlcZzjbEEE2EIPu8SGeCbwVA/edit#gid=0
+
 
 class Sheet {
     constructor() {
@@ -13,14 +15,15 @@ class Sheet {
         await this.doc.loadInfo(); // loads document properties and worksheets
     }
 
-    async addRows(rows) {
-        const sheet = this.doc.sheetsByIndex[0];
-        await sheet.addRows(rows);
+    async addRows(rows, sheetIndex) {
+        const sheet = this.doc.sheetsByIndex[sheetIndex];
+        await sheet.addRows(rows)
     }
 
-    async getRows() {
-        const sheet = this.doc.sheetsByIndex[0];
-        return await sheet.getRows();
+    async getRows(sheetIndex) {
+        const sheet = this.doc.sheetsByIndex[sheetIndex];
+        const rows = await sheet.getRows()
+        return rows
     }
 }
 
